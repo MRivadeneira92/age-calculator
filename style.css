@@ -27,10 +27,9 @@ body {
     background-color: hsl(0, 0%, 100%);
     margin: 0 auto;
     width: 600px;
-    border-radius: 10px;
+    border-radius: 10px 10px 120px 10px;
     padding: 30px;
     font-family: Poppins;
-
 }
 
 .line-button {
@@ -119,8 +118,22 @@ input[type=number] {
 
 .result-digit {
     color: hsl(259, 100%, 65%);
+    margin-right: 2px;
 }
 
+/* error colors */
 
+.error {
+    outline: hsl(0, 100%, 67%);
+    color: hsl(0, 100%, 67%);
+}
+
+.error-message {
+    display: none;
+    color: hsl(0, 100%, 67%);
+    font-family: Poppins;
+    font-size: 10px;
+    letter-spacing: normal !important;
+}
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }

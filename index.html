@@ -14,22 +14,25 @@
 
   <div class="container">
     <div class="input-container">
-      <div class="num-container">
+      <div class="num-container" id="container-day">
         <p>DAY</p>
-        <input type="number" placeholder="DD">
+        <input type="number" placeholder="DD" id="input-day">
+        <p class="error-message" id="error-day">Must be a valid day</p>
       </div>
-      <div class="num-container">
+      <div class="num-container" id="container-month">
         <p>MONTH</p>
-        <input type="number" placeholder="MM">
+        <input type="number" placeholder="MM" id="input-month">
+        <p class="error-message" id="error-month">Must be a valid month</p>
       </div>
-      <div class="num-container">
+      <div class="num-container" id="container-year">
         <p>YEAR</p>
-        <input type="number" placeholder="YYYY">
+        <input type="number" placeholder="YYYY" id="input-year">
+        <p class="error-message" id="error-year">Must be in the past</p>
       </div>
     </div>
     <div class="line-button">
       <hr>
-      <button type="button"><img src="./assets/images/icon-arrow.svg" alt="button"></button>
+      <button type="button" id="button-calc"><img src="./assets/images/icon-arrow.svg" alt="button"></button>
     </div>
     <div class="result">
       <div class="result-num">
@@ -51,4 +54,30 @@
     Coded by <a href="#">Your Name Here</a>.
   </div>
 </body>
+<script>  
+  let inputDay = document.getElementById("input-day");
+  let inputMonth = document.getElementById("input-month");
+  let inputYear = document.getElementById("input-year");
+  let btnCalc = document.getElementById("button-calc");
+
+  btnCalc.addEventListener("click", function(e) {
+    inputMonth = document.getElementById("input-month").value;
+    console.log(inputMonth);
+    errorInput();
+  });
+
+  function errorInput() {
+    if (inputMonth >= 13 || inputMonth <= 0) {
+      errorColor();
+      document.getElementById("error-month").style.display = "block";
+    }
+  }
+
+  function errorColor() {
+    document.getElementById("container-day").classList.add("error");
+    document.getElementById("container-year").classList.add("error");
+    document.getElementById("container-month").classList.add("error");
+  }
+
+</script>
 </html>
