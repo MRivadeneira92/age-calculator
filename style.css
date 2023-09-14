@@ -19,6 +19,11 @@
     src: url(./assets/fonts/Poppins-Bold.ttf);
 }
 
+@font-face {
+    font-family: Poppins italics;
+    src :  url(./assets/fonts/Poppins-Italic.ttf);
+}
+
 body {
     background-color: hsl(0, 0%, 86%);
 }
@@ -124,16 +129,20 @@ input[type=number] {
 /* error colors */
 
 .error {
-    outline: hsl(0, 100%, 67%);
     color: hsl(0, 100%, 67%);
+}
+
+.error-input {
+    border: 1px solid hsl(0,100%, 67%) !important;
 }
 
 .error-message {
     display: none;
     color: hsl(0, 100%, 67%);
-    font-family: Poppins;
+    font-family: Poppins italics !important;
     font-size: 10px;
     letter-spacing: normal !important;
+    margin-top: 4px;
 }
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
