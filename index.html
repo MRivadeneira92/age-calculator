@@ -60,6 +60,7 @@
   let inputYear = document.getElementById("input-year");
   let btnCalc = document.getElementById("button-calc");
   let inputError = false; 
+  let inputPass = false; // True when the button was pressed for the first time and an error showed up
 
   btnCalc.addEventListener("click", function(e) {
     inputDay = document.getElementById("input-day").value;
@@ -67,30 +68,39 @@
     inputYear = document.getElementById("input-year").value;
     if (inputDay == "") {
       errorEmply("day");
+      errorShow("day");
       inputError = true;
     }
     if (inputMonth == "") {
       errorEmply("month");
+      errorShow("month");
       inputError = true;
     }
     if (inputYear == "") {
       errorEmply("year");
+      errorShow("year");
       inputError = true;
     }
 
     if (inputDay >= 32) {
       document.getElementById("error-day").innerHTML = "Must be a valid day";
       document.getElementById("input-day").classList.add("error-input");
+      errorShow("day");
       inputError = true;
     }
+
+    dayCalc(inputDay, inputMonth);
+
     if (inputMonth >= 13 || inputMonth <= 0 && inputMonth != "") {
       document.getElementById("error-month").innerHTML = "Must be a valid month";
       document.getElementById("input-month").classList.add("error-input");
+      errorShow("month");
       inputError = true;
     }
     
     if (inputYear > 2023 ) {
       document.getElementById("error-year").innerHTML = "Must be in the past";
+      errorShow("year");
       inputError = true;
     }
 
@@ -101,14 +111,45 @@
       document.getElementById("input-day").classList.add("error-input");
       document.getElementById("input-month").classList.add("error-input");
       document.getElementById("input-year").classList.add("error-input");
-      document.getElementById("error-day").style.display = "block";
-      document.getElementById("error-month").style.display = "block";
-      document.getElementById("error-year").style.display = "block";
+      inputPass = true;
     }
+
+    if (inputError == false && inputPass == true) {
+      document.getElementById("container-day").classList.remove("error");
+      document.getElementById("container-year").classList.remove("error");
+      document.getElementById("container-month").classList.remove("error");
+      document.getElementById("input-day").classList.remove("error-input");
+      document.getElementById("input-month").classList.remove("error-input");
+      document.getElementById("input-year").classList.remove("error-input");
+      document.getElementById("error-day").style.display = "none";
+      document.getElementById("error-month").style.display = "none";
+      document.getElementById("error-year").style.display = "none";
+      inputPass = false;
+    }
+
+    inputError = false;
   });
 
+  function errorShow(date) {
+    document.getElementById("error-" + date).style.display = "block";
+  }
   function errorEmply(date) {
     document.getElementById("error-"+ date).innerHTML = "This field is required";
+  }
+
+  function dayCalc(day,month) {
+    if (month == 4 || month == 6  || month == 9 || month == 11 && day >= 31) {
+      document.getElementById("container-day").classList.add("error");
+      document.getElementById("input-day").classList.add("error-input");
+      document.getElementById("error-day").innerHTML = "Must be a valid day";
+      inputError = true;
+    }
+    if (month == 2 && day >= 29) {
+      document.getElementById("container-day").classList.add("error");
+      document.getElementById("input-day").classList.add("error-input");
+      document.getElementById("error-day").innerHTML = "Must be a valid day";
+      inputError = true;
+    }
   }
 
 </script>
