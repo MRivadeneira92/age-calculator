@@ -59,13 +59,19 @@
   let inputMonth = document.getElementById("input-month");
   let inputYear = document.getElementById("input-year");
   let btnCalc = document.getElementById("button-calc");
+  let today = new Date(); 
+  let finalDay = 0;
+  let finalMonth = 0;
+  let finalYear = 0;
   let inputError = false; 
   let inputPass = false; // True when the button was pressed for the first time and an error showed up
 
   btnCalc.addEventListener("click", function(e) {
-    inputDay = document.getElementById("input-day").value;
-    inputMonth = document.getElementById("input-month").value;
-    inputYear = document.getElementById("input-year").value;
+    inputDay = Number(document.getElementById("input-day").value);
+    inputMonth = Number(document.getElementById("input-month").value);
+    inputYear = Number(document.getElementById("input-year").value);
+    // Error checking 
+
     if (inputDay == "") {
       errorEmply("day");
       errorShow("day");
@@ -111,7 +117,8 @@
       document.getElementById("input-day").classList.add("error-input");
       document.getElementById("input-month").classList.add("error-input");
       document.getElementById("input-year").classList.add("error-input");
-      inputPass = true;
+      inputPass = false;
+      return true; 
     }
 
     if (inputError == false && inputPass == true) {
@@ -126,8 +133,34 @@
       document.getElementById("error-year").style.display = "none";
       inputPass = false;
     }
-
     inputError = false;
+
+    // Calculate date
+    let removeYear = false;
+    let removeMonth = false;
+    let todayMonth = today.getMonth() + 1;
+    if (inputMonth <= todayMonth && (inputDay > today.getDate())) {
+      removeYear = true;
+    }
+    
+    if (todayMonth == inputMonth && today.getDate() < inputDay) {
+      inputMonth = inputMonth + 1;
+    }
+
+    if ((todayMonth - inputMonth) < 0 ) {
+      inputMonth = inputMonth - 12;
+    }
+    
+    if (removeYear == true) {
+      inputYear = inputYear + 1;
+    }
+
+    document.getElementById("result-years").innerHTML = today.getFullYear() - inputYear;
+    document.getElementById("result-month").innerHTML = todayMonth - inputMonth;
+    document.getElementById("result-days").innerHTML = today.getDate() - inputDay;
+    if (today.getDate() - inputDay < 0) {
+      document.getElementById("result-days").innerHTML = 31 + (today.getDate() - inputDay);    
+    }
   });
 
   function errorShow(date) {
@@ -138,16 +171,18 @@
   }
 
   function dayCalc(day,month) {
-    if (month == 4 || month == 6  || month == 9 || month == 11 && day >= 31) {
+    if ((month == 4 || month == 6  || month == 9 || month == 11) && day >= 31) {
       document.getElementById("container-day").classList.add("error");
       document.getElementById("input-day").classList.add("error-input");
       document.getElementById("error-day").innerHTML = "Must be a valid day";
+      errorShow("day");
       inputError = true;
     }
     if (month == 2 && day >= 29) {
       document.getElementById("container-day").classList.add("error");
       document.getElementById("input-day").classList.add("error-input");
       document.getElementById("error-day").innerHTML = "Must be a valid day";
+      errorShow("day");
       inputError = true;
     }
   }
