@@ -32,7 +32,7 @@ body {
     background-color: hsl(0, 0%, 100%);
     margin: 0 auto;
     width: 600px;
-    border-radius: 10px 10px 120px 10px;
+    border-radius: 15px 15px 120px 15px;
     padding: 30px;
     font-family: Poppins;
 }
@@ -51,10 +51,14 @@ body {
 }
 
 .line-button button {
-    border-radius: 50px;
+    border-radius: 50%;
     border: none;
     background-color: hsl(259, 100%, 65%);
-    padding: 10px;
+    padding: 14px;
+}
+
+button img {
+    width: 30px;
 }
 
 .line-button button:hover {
@@ -123,7 +127,7 @@ input[type=number] {
 
 .result-digit {
     color: hsl(259, 100%, 65%);
-    margin-right: 2px;
+    margin-right: 17px;
 }
 
 /* error colors */
@@ -144,5 +148,36 @@ input[type=number] {
     letter-spacing: normal !important;
     margin-top: 4px;
 }
+
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
+
+@media (width: 375px) {
+    .container {
+        width: 340px;
+    }
+
+    .input-container {
+        margin-bottom: 31px;
+    }
+    .num-container input {
+        width: 84px;
+    }
+
+    .line-button {
+        margin-bottom: 26px;
+    }
+    .line-button button {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    button img {
+        width: 20px;
+    }
+    .result-num {
+        font-size: 51px;
+        line-height: 55px;
+    }
+}
