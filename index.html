@@ -64,7 +64,6 @@
   let finalMonth = 0;
   let finalYear = 0;
   let inputError = false; 
-  let inputPass = false; // True when the button was pressed for the first time and an error showed up
 
   btnCalc.addEventListener("click", function(e) {
     inputDay = Number(document.getElementById("input-day").value);
@@ -72,6 +71,18 @@
     inputYear = Number(document.getElementById("input-year").value);
     // Error checking 
 
+    if (inputError = true) {
+      document.getElementById("container-day").classList.remove("error");
+      document.getElementById("container-year").classList.remove("error");
+      document.getElementById("container-month").classList.remove("error");
+      document.getElementById("input-day").classList.remove("error-input");
+      document.getElementById("input-month").classList.remove("error-input");
+      document.getElementById("input-year").classList.remove("error-input");
+      document.getElementById("error-day").style.display = "none";
+      document.getElementById("error-month").style.display = "none";
+      document.getElementById("error-year").style.display = "none";
+      inputError = false;
+    }
     if (inputDay == "") {
       errorEmply("day");
       errorShow("day");
@@ -117,21 +128,7 @@
       document.getElementById("input-day").classList.add("error-input");
       document.getElementById("input-month").classList.add("error-input");
       document.getElementById("input-year").classList.add("error-input");
-      inputPass = false;
       return true; 
-    }
-
-    if (inputError == false && inputPass == true) {
-      document.getElementById("container-day").classList.remove("error");
-      document.getElementById("container-year").classList.remove("error");
-      document.getElementById("container-month").classList.remove("error");
-      document.getElementById("input-day").classList.remove("error-input");
-      document.getElementById("input-month").classList.remove("error-input");
-      document.getElementById("input-year").classList.remove("error-input");
-      document.getElementById("error-day").style.display = "none";
-      document.getElementById("error-month").style.display = "none";
-      document.getElementById("error-year").style.display = "none";
-      inputPass = false;
     }
     inputError = false;
 
@@ -142,7 +139,7 @@
     if (inputMonth <= todayMonth && (inputDay > today.getDate())) {
       removeYear = true;
     }
-    
+
     if (todayMonth == inputMonth && today.getDate() < inputDay) {
       inputMonth = inputMonth + 1;
     }
