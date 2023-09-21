@@ -186,3 +186,28 @@ input[type=number] {
         line-height: 55px;
     }
 }
+
+.animation-load-year {
+    color: hsl(259, 100%, 65%);
+    font-size: 80px;
+    display: flex;
+    flex-direction: row;
+    font-family: Poppins extrabold !important;
+    line-height: 80px;
+}
+
+.ani-up {
+    position: relative;
+    animation-name: numberUp; 
+    animation-duration: 1s;
+}
+
+@keyframes numberUp {
+    0% {
+        position: relative;
+        bottom: 0;
+    }
+    100% {
+        bottom: 80px;
+    }
+}
