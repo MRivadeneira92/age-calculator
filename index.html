@@ -36,7 +36,10 @@
     </div>
     <div class="result">
       <div class="result-num">
-        <p id="result-years" class="result-digit">--</p>
+        <div id="result-years" class="result-digit">
+          <p id="result-year-0">-</p>
+          <p id="result-year-1">-</p>
+        </div>
         <p>years</p>
       </div>
       <div class="result-num">
@@ -158,8 +161,32 @@
     if (today.getDate() - inputDay < 0) {
       document.getElementById("result-days").innerHTML = 31 + (today.getDate() - inputDay);    
     }
+
   });
 
+  // number separation for animation 
+  let resultYear = today.getFullYear() - inputYear;
+  let resultMonth = todayMonth - inputMonth;
+  let resultDay = today.getDate() - inputDay;
+  let yearGroup = separateDigits(resultYear);
+  let monthGroup = separateDigits(resultMonth);
+  let dayMonth = separateDigits(resultDay);
+
+  function animateDigit(value, position, ) {
+    //find position 
+    let targetValue = value[0];
+    for (let i = 0; targetValue < i; i++) {
+      document.getElementById("result-" + position + "-1").innerHTML = i;
+    }
+     var i = 1;
+     function myLoop() {
+      setTimeout(() => {
+        document.getElementById("result-" + position + "-1").innerHTML = i;
+      }, 1000);
+     }
+  }
+
+  // Functions
   function errorShow(date) {
     document.getElementById("error-" + date).style.display = "block";
   }
@@ -182,6 +209,12 @@
       errorShow("day");
       inputError = true;
     }
+  }
+
+  function separateDigits(numbers) {
+    let digits = numbers.toString().split("");
+    let realDigits = digits.map(Number);
+    return realDigits;
   }
 
 </script>

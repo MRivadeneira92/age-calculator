@@ -125,11 +125,16 @@ input[type=number] {
 
 }
 
-.result-digit {
+.result-digit{
     color: hsl(259, 100%, 65%);
     margin-right: 17px;
+    display: flex;
+    flex-direction: row;
 }
 
+.result-digit p {
+    color: hsl(259, 100%, 65%);
+}
 /* error colors */
 
 .error {
