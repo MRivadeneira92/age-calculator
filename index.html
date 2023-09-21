@@ -37,10 +37,14 @@
     <div class="result">
       <div class="result-num">
         <div id="result-years" class="result-digit">
-          <p id="result-year-0">-</p>
-          <p id="result-year-1">-</p>
+          <p id="result-year-1" class="result-pos">-</p>
+          <p id="result-year-0" class="result-pos">-</p>
         </div>
         <p>years</p>
+      </div>
+      <div id="ani-year-container" class="animation-load-year">
+        <p id="an-load-year-1">-</p>
+        <div id="an-load-year-0"></div>
       </div>
       <div class="result-num">
         <p id="result-month" class="result-digit">--</p>
@@ -54,7 +58,7 @@
   </div>
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="#">Max Rivadeneira</a>.
   </div>
 </body>
 <script>  
@@ -155,13 +159,19 @@
       inputYear = inputYear + 1;
     }
 
-    document.getElementById("result-years").innerHTML = today.getFullYear() - inputYear;
+    //document.getElementById("result-years").innerHTML = today.getFullYear() - inputYear; // 
     document.getElementById("result-month").innerHTML = todayMonth - inputMonth;
     document.getElementById("result-days").innerHTML = today.getDate() - inputDay;
     if (today.getDate() - inputDay < 0) {
       document.getElementById("result-days").innerHTML = 31 + (today.getDate() - inputDay);    
     }
-
+    let resultYear = today.getFullYear() - inputYear;
+    let resultMonth = todayMonth - inputMonth;
+    let resultDay = today.getDate() - inputDay;
+    let yearGroup = separateDigits(resultYear);
+    let monthGroup = separateDigits(resultMonth);
+    let dayMonth = separateDigits(resultDay);
+    animateDigit(yearGroup, "year");
   });
 
   // number separation for animation 
@@ -172,19 +182,34 @@
   let monthGroup = separateDigits(resultMonth);
   let dayMonth = separateDigits(resultDay);
 
-  function animateDigit(value, position, ) {
-    //find position 
-    let targetValue = value[0];
-    for (let i = 0; targetValue < i; i++) {
-      document.getElementById("result-" + position + "-1").innerHTML = i;
-    }
-     var i = 1;
-     function myLoop() {
-      setTimeout(() => {
-        document.getElementById("result-" + position + "-1").innerHTML = i;
-      }, 1000);
-     }
+
+  function animateDigit(value, position) {
+    var counter = 0; 
+    let numberCounter = 0;
+    let objectCounter = Object.keys(value).length;
+    let targetValue = value[numberCounter];
+    var i = setInterval(function() {
+      if (counter == targetValue) {
+        clearInterval(i)
+        document.getElementById("result-"+ position + "-" + numberCounter).innerHTML = counter;
+        document.getElementById("result-"+ position + "-" + numberCounter).classList.add("ani-up-final");
+        numberCounter++;
+      }
+      else {
+        let tagId = "ani-number"+ counter;
+        let newTag =  '<p id="' + tagId + '" class="ani-up">' + counter + '</p>';
+        document.getElementById("an-load-" + position + "-0").insertAdjacentHTML("afterbegin" , newTag);
+        counter++;
+        setTimeout(function() {
+        document.querySelector(".ani-up").remove();
+        }, 450)
+      }
+    }, 460) 
   }
+
+  function deleteNumber(pos) {
+      document.getElementById("ani-number"+pos).remove();
+      }
 
   // Functions
   function errorShow(date) {

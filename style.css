@@ -186,3 +186,49 @@ input[type=number] {
         line-height: 55px;
     }
 }
+
+.animation-load-year {
+    color: hsl(259, 100%, 65%);
+    font-size: 80px;
+    display: flex;
+    flex-direction: row;
+    font-family: Poppins extrabold !important;
+    line-height: 80px;
+}
+
+.ani-up {
+    position: relative;
+    animation-name: numberUp; 
+    animation-duration: 0.5s;
+}
+
+.ani-up-final {
+    animation-name: numerFinal; 
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;}  
+
+
+.result-pos {
+    top:80px;
+    position: relative;
+}
+
+@keyframes numberUp {
+    0% {
+        position: relative;
+        bottom: 0;
+    }
+    100% {
+        bottom: 160px;
+    }
+}
+
+@keyframes numerFinal {
+    0% {
+        position: relative;
+        top: 80px;
+    }
+    100% {
+        top: 0px;
+    }
+}
