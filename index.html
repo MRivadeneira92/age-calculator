@@ -36,12 +36,11 @@
     </div>
     <div class="result">
       <div class="result-num">
-        <div class="result-digit placeholder">
+        <div id="container-placeholder" class="result-digit placeholder">
           <p class="result-placeholder">-</p>
           <p class="result-placeholder">-</p>
         </div>
         <div id="result-years" class="result-digit">
-
           <p id="result-year-1" class="result-pos">-</p>
           <p id="result-year-0" class="result-pos">-</p>
         </div>
@@ -164,6 +163,7 @@
       inputYear = inputYear + 1;
     }
 
+    //document.getElementById("result-years").innerHTML = today.getFullYear() - inputYear; // 
     //document.getElementById("result-years").innerHTML = today.getFullYear() - inputYear; // 
     document.getElementById("result-month").innerHTML = todayMonth - inputMonth;
     document.getElementById("result-days").innerHTML = today.getDate() - inputDay;
