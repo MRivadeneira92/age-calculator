@@ -213,6 +213,14 @@ input[type=number] {
     position: relative;
 }
 
+.result-placeholder {
+    position: relative;
+}
+
+.placeholder {
+    position: absolute;
+}
+
 @keyframes numberUp {
     0% {
         position: relative;

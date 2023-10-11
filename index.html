@@ -36,7 +36,12 @@
     </div>
     <div class="result">
       <div class="result-num">
+        <div class="result-digit placeholder">
+          <p class="result-placeholder">-</p>
+          <p class="result-placeholder">-</p>
+        </div>
         <div id="result-years" class="result-digit">
+
           <p id="result-year-1" class="result-pos">-</p>
           <p id="result-year-0" class="result-pos">-</p>
         </div>
@@ -184,27 +189,36 @@
 
 
   function animateDigit(value, position) {
-    var counter = 0; 
+    let valueReverse = value.length - 1;
+    let counter = 0; 
     let numberCounter = 0;
     let objectCounter = Object.keys(value).length;
-    let targetValue = value[numberCounter];
-    var i = setInterval(function() {
-      if (counter == targetValue) {
-        clearInterval(i)
-        document.getElementById("result-"+ position + "-" + numberCounter).innerHTML = counter;
-        document.getElementById("result-"+ position + "-" + numberCounter).classList.add("ani-up-final");
-        numberCounter++;
-      }
-      else {
-        let tagId = "ani-number"+ counter;
-        let newTag =  '<p id="' + tagId + '" class="ani-up">' + counter + '</p>';
-        document.getElementById("an-load-" + position + "-0").insertAdjacentHTML("afterbegin" , newTag);
-        counter++;
-        setTimeout(function() {
-        document.querySelector(".ani-up").remove();
-        }, 450)
-      }
-    }, 460) 
+    let targetValue = value[valueReverse];
+    var changeAni = setInterval(function() {
+      var i = setInterval(function() {
+        if (counter == targetValue) {
+          clearInterval(i)
+          document.getElementById("result-"+ position + "-" + numberCounter).innerHTML = counter;
+          document.getElementById("result-"+ position + "-" + numberCounter).classList.add("ani-up-final");
+          numberCounter++;
+          counter = 0;
+          valueReverse = valueReverse - 1;
+        }
+        else {
+          let tagId = "ani-number"+ counter;
+          let newTag =  '<p id="' + tagId + '" class="ani-up">' + counter + '</p>';
+          document.getElementById("an-load-" + position + "-0").insertAdjacentHTML("afterbegin" , newTag);
+          counter = counter + 1;
+          setTimeout(function() {
+          document.querySelector(".ani-up").remove();
+          }, 450)
+        }
+        targetValue = value[valueReverse];
+        if (objectCounter == numberCounter) {
+          clearInterval(changeAni);
+        }
+      }, 460) 
+    }, 1000)
   }
 
   function deleteNumber(pos) {
