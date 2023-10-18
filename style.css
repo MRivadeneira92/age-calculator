@@ -71,6 +71,11 @@ button img {
     flex-direction: row;
 }
 
+.name-tag {
+    position: relative;
+    left: 90px;
+}
+
 .num-container {
     margin-left: 10px;
     color: hsl(0, 1%, 44%);
@@ -91,6 +96,7 @@ button img {
     font-size: 22px;
     font-weight: bold;
 }
+
 .num-container input:focus {
     border: 1px solid hsl(259, 100%, 65%);
     outline: hsl(259, 100%, 65%);
@@ -122,7 +128,6 @@ input[type=number] {
     flex-direction: row;
     font-family: Poppins extrabold !important;
     line-height: 80px;
-
 }
 
 .result-digit{
@@ -130,11 +135,35 @@ input[type=number] {
     margin-right: 17px;
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 .result-digit p {
     color: hsl(259, 100%, 65%);
 }
+
+.result-placeholder {
+    position: absolute;
+}
+
+.result-ani {
+    position: absolute;
+}
+
+.result-pos {
+    top:80px;
+    position: absolute;
+}
+
+.placeholder {
+    position: relative;
+}
+
+.right-dig {
+    left: 47px;
+}
+
+
 /* error colors */
 
 .error {
@@ -184,59 +213,5 @@ input[type=number] {
     .result-num {
         font-size: 51px;
         line-height: 55px;
-    }
-}
-
-.animation-load-year {
-    color: hsl(259, 100%, 65%);
-    font-size: 80px;
-    display: flex;
-    flex-direction: row;
-    font-family: Poppins extrabold !important;
-    line-height: 80px;
-}
-
-.ani-up {
-    position: relative;
-    animation-name: numberUp; 
-    animation-duration: 0.5s;
-}
-
-.ani-up-final {
-    animation-name: numerFinal; 
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;}  
-
-
-.result-pos {
-    top:80px;
-    position: relative;
-}
-
-.result-placeholder {
-    position: relative;
-}
-
-.placeholder {
-    position: absolute;
-}
-
-@keyframes numberUp {
-    0% {
-        position: relative;
-        bottom: 0;
-    }
-    100% {
-        bottom: 160px;
-    }
-}
-
-@keyframes numerFinal {
-    0% {
-        position: relative;
-        top: 80px;
-    }
-    100% {
-        top: 0px;
     }
 }
