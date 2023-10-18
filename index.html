@@ -37,8 +37,8 @@
     <div class="result">
       <div class="result-num">
         <div id="container-placeholder" class="result-digit placeholder">
-          <p class="result-placeholder">-</p>
-          <p class="result-placeholder">-</p>
+          <p id="num-placeholder-1" class="result-placeholder">-</p>
+          <p id="num-placeholder-0" class="result-placeholder">-</p>
         </div>
         <div id="result-years" class="result-digit">
           <p id="result-year-1" class="result-pos">-</p>
@@ -176,7 +176,7 @@
     let yearGroup = separateDigits(resultYear);
     let monthGroup = separateDigits(resultMonth);
     let dayMonth = separateDigits(resultDay);
-    animateDigit(yearGroup, "year");
+    animateDigitTEST(yearGroup, "year");
   });
 
   // number separation for animation 
@@ -195,6 +195,10 @@
     let objectCounter = Object.keys(value).length;
     let targetValue = value[valueReverse];
     var changeAni = setInterval(function() {
+      document.getElementById("num-placeholder-" + numberCounter).classList.add("ani-up");
+      setTimeout(function() {
+      document.getElementById("num-placeholder-" + numberCounter).remove();
+      }, 450);
       var i = setInterval(function() {
         if (counter == targetValue) {
           clearInterval(i)
@@ -207,10 +211,10 @@
         else {
           let tagId = "ani-number"+ counter;
           let newTag =  '<p id="' + tagId + '" class="ani-up">' + counter + '</p>';
-          document.getElementById("an-load-" + position + "-0").insertAdjacentHTML("afterbegin" , newTag);
+          document.getElementById("an-load-" + position + "-" + numberCounter).insertAdjacentHTML("afterbegin" , newTag);
           counter = counter + 1;
           setTimeout(function() {
-          document.querySelector(".ani-up").remove();
+            document.querySelector(".ani-up").remove();
           }, 450)
         }
         targetValue = value[valueReverse];
@@ -220,6 +224,42 @@
       }, 460) 
     }, 1000)
   }
+
+  //TEST
+  function animateDigitTEST(value, position) {
+    let numberCounter = 0;
+    let valueReverse = value.length - 1;
+    let foo = setInterval(function() {
+      if(valueReverse == 0) {
+        clearInterval(foo);
+      }
+      let targetValue = value[valueReverse];
+      singleDigitAnimate(targetValue, position, numberCounter);
+      numberCounter++;
+      valueReverse--;
+    }, 1000)
+  }
+
+
+  function singleDigitAnimate(value, position, number) {
+    let counter = 0;
+    var i = setInterval(function() {
+      if(counter == value) {
+        clearInterval(i);
+        document.getElementById("result-"+ position + "-" + number).innerHTML = counter;
+        document.getElementById("result-"+ position + "-" + number).classList.add("ani-up-final");
+      }
+      else {
+        let newTag = '<p class="ani-up">' + counter + '</p>';
+        document.getElementById("an-load-" + position + "-" + number).insertAdjacentHTML("afterbegin" , newTag);
+        counter = counter + 1;
+        setTimeout(function() {
+          document.querySelector(".ani-up").remove();
+        }, 440)
+      }
+    },450)
+  }
+  //
 
   function deleteNumber(pos) {
       document.getElementById("ani-number"+pos).remove();
