@@ -72,8 +72,8 @@ button img {
 }
 
 .name-tag {
-    position: relative;
-    left: 90px;
+    position: absolute;
+    left: 109px;
 }
 
 .num-container {
@@ -122,6 +122,10 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+.result {
+    position: relative;
+}
+
 .result-num {
     font-size: 80px;
     display: flex;
@@ -154,15 +158,6 @@ input[type=number] {
     top:80px;
     position: absolute;
 }
-
-.placeholder {
-    position: relative;
-}
-
-.right-dig {
-    left: 47px;
-}
-
 
 /* error colors */
 
@@ -213,5 +208,9 @@ input[type=number] {
     .result-num {
         font-size: 51px;
         line-height: 55px;
+    }
+
+    .name-tag{
+        left: 76px;
     }
 }

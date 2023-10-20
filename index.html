@@ -40,15 +40,15 @@
           <p id="result-year">--</p>
           <!-- <p id="result-year-0" >-</p> -->
         </div>
-        <p>years</p>
+        <p class="name-tag">years</p>
       </div>
       <div class="result-num">
         <p id="result-month" class="result-digit">--</p>
-        <p>months</p>
+        <p class="name-tag">months</p>
       </div>
       <div class="result-num">
         <p id="result-day" class="result-digit">--</p>
-        <p>days</p>
+        <p class="name-tag">days</p>
       </div>
     </div>
   </div>
@@ -67,6 +67,7 @@
   let finalMonth = 0;
   let finalYear = 0;
   let inputError = false; 
+  let clickStatus = false; // true if button is pressed.
 
   btnCalc.addEventListener("click", function(e) {
     inputDay = Number(document.getElementById("input-day").value);
@@ -155,10 +156,6 @@
       inputYear = inputYear + 1;
     }
 
-    //document.getElementById("result-years").innerHTML = today.getFullYear() - inputYear; // 
-    //document.getElementById("result-years").innerHTML = today.getFullYear() - inputYear; // 
-    document.getElementById("result-month").innerHTML = todayMonth - inputMonth;
-    document.getElementById("result-day").innerHTML = today.getDate() - inputDay;
     if (today.getDate() - inputDay < 0) {
       document.getElementById("result-day").innerHTML = 31 + (today.getDate() - inputDay);    
     }
@@ -168,9 +165,14 @@
     let yearGroup = separateDigits(resultYear);
     let monthGroup = separateDigits(resultMonth);
     let dayMonth = separateDigits(resultDay);
+    
     animateDigit(resultYear, "year");
-    animateDigit(resultMonth, "month");
-    animateDigit(resultDay, "day");
+    setTimeout(function() {
+      animateDigit(resultMonth, "month");
+    },800)
+    setTimeout(function() {
+      animateDigit(resultDay, "day");
+    },1200)
   });
 
   // number separation for animation 
@@ -180,6 +182,7 @@
   let yearGroup = separateDigits(resultYear);
   let monthGroup = separateDigits(resultMonth);
   let dayMonth = separateDigits(resultDay);
+  
 
 
   function animateDigit(value, position) {
@@ -187,14 +190,13 @@
     let i = setInterval(function() {
       if (counter == value) {
         clearInterval(i);
-        posCounter++;
       }
       document.getElementById("result-" + position).innerHTML = counter;
       counter++;
-    }, 80)
+    }, 60)
   }
 
-  function animateUnit(value, position, number) {
+  /*function animateUnit(value, position, number) {
     let counter = 0;
     let i = setInterval(function() {
       if (counter == value) {
@@ -207,7 +209,7 @@
   }
   function deleteNumber(pos) {
       document.getElementById("ani-number"+pos).remove();
-      }
+      }*/
 
   // Functions
   function errorShow(date) {
