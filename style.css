@@ -214,3 +214,49 @@ input[type=number] {
         left: 76px;
     }
 }
+
+.ani-up{
+    animation-name: ani-up;
+    animation-duration: 2s;
+}
+
+.ani-right {
+    animation-name: ani-right;
+    animation-duration: 1s;
+}
+
+@keyframes ani-up {
+    0% {
+        bottom : 0;
+    }
+
+    10% {
+        bottom: 10px;
+    }
+
+    30% {
+        bottom: -5px;
+    }
+
+    40% {
+        bottom: 0;
+    }
+}
+
+@keyframes ani-right {
+    0% {
+        right: 0;
+    }
+
+    10% {
+        right: 10px;
+    }
+
+    30% {
+        right: -5px;
+    }
+
+    40% {
+        right: 0;
+    }
+}

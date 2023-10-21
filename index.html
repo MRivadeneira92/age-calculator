@@ -70,9 +70,28 @@
   let clickStatus = false; // true if button is pressed.
 
   btnCalc.addEventListener("click", function(e) {
+    if (clickStatus == true) {
+      document.getElementById("result-year").classList.add("ani-right");
+      setTimeout(function(){
+        document.getElementById("result-year").classList.remove("ani-right");
+      },2000)
+      document.getElementById("result-month").classList.add("ani-right");
+      setTimeout(function(){
+        document.getElementById("result-month").classList.remove("ani-right");
+      },2000)
+      document.getElementById("result-day").classList.add("ani-right");
+      setTimeout(function(){
+        document.getElementById("result-day").classList.remove("ani-right");
+      },2000)
+      document.getElementById("result-year").innerHTML = "--";
+      document.getElementById("result-month").innerHTML = "--";
+      document.getElementById("result-day").innerHTML = "--";
+      clickStatus = false;
+    }
     inputDay = Number(document.getElementById("input-day").value);
     inputMonth = Number(document.getElementById("input-month").value);
     inputYear = Number(document.getElementById("input-year").value);
+    clickStatus = true;
     // Error checking 
 
     if (inputError = true) {
@@ -156,21 +175,18 @@
       inputYear = inputYear + 1;
     }
 
-    if (today.getDate() - inputDay < 0) {
-      document.getElementById("result-day").innerHTML = 31 + (today.getDate() - inputDay);    
-    }
     let resultYear = today.getFullYear() - inputYear;
     let resultMonth = todayMonth - inputMonth;
     let resultDay = today.getDate() - inputDay;
-    let yearGroup = separateDigits(resultYear);
-    let monthGroup = separateDigits(resultMonth);
-    let dayMonth = separateDigits(resultDay);
     
     animateDigit(resultYear, "year");
     setTimeout(function() {
       animateDigit(resultMonth, "month");
     },800)
     setTimeout(function() {
+      if (today.getDate() - inputDay < 0) {
+        resultDay = 31 + (today.getDate() - inputDay);    
+      }
       animateDigit(resultDay, "day");
     },1200)
   });
@@ -183,17 +199,24 @@
   let monthGroup = separateDigits(resultMonth);
   let dayMonth = separateDigits(resultDay);
   
-
-
   function animateDigit(value, position) {
+    let timeAnimation = 60;
     let counter = 0; 
+    if (value > 50) {
+      timeAnimation = 30;
+    }
     let i = setInterval(function() {
       if (counter == value) {
         clearInterval(i);
+        document.getElementById("result-" + position).classList.add("ani-up");
+        setTimeout(function(){
+          document.getElementById("result-" + position).classList.remove("ani-up");
+        },3000)
+
       }
       document.getElementById("result-" + position).innerHTML = counter;
       counter++;
-    }, 60)
+    }, timeAnimation)
   }
 
   /*function animateUnit(value, position, number) {
