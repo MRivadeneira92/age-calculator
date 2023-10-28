@@ -82,6 +82,33 @@ const proudOfThisFunc = () => {
   console.log('🎉')
 }
 ```
+This proyect help me in learning how to display information clearly and making it appealing by using simple animations. When I put together the proyect layout I wanted a simple counting up animation when displaying the result of the calculated date. This was achieved by first storing the target value in a variable, setting a second variable vith value 0 and adding one to this variable until it reaches the same number as target value. 
+
+I wanted to make a simple function that could animate any digit just by giving it a value and where it has to display the animation. The code is as follows: 
+
+```js
+  function animateDigit(value, position) {
+    let timeAnimation = 60;
+    let counter = 0; 
+    if (value > 50) {
+      timeAnimation = 30;
+    }
+    let i = setInterval(function() {
+      if (counter == value) {
+        clearInterval(i);
+        document.getElementById("result-" + position).classList.add("ani-up");
+        setTimeout(function(){
+          document.getElementById("result-" + position).classList.remove("ani-up");
+        },3000)
+      }
+      document.getElementById("result-" + position).innerHTML = counter;
+      counter++;
+    }, timeAnimation)
+  }
+```
+
+The core of the function is inside setInterval. By using the same naming conventions on the id of the tags storing the resulting values, this function can find where the animation has to go with the input stored in "position". 
+Inside the function there is an animation. It triggers when the target number has been reached and it is a simple bump to signal when that calculation is done. 
 
 If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
 
@@ -92,6 +119,9 @@ If you want more help with writing markdown, we'd recommend checking out [The Ma
 Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
 
 **Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+
+
+My main objective moving fowards is learning how to make better animations. I want to me able to create an odometer-like animation for the numbers.  
 
 ### Useful resources
 
@@ -104,7 +134,7 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 - Website - [Add your name here](https://www.your-site.com)
 - Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Twitter - [@Copland_max](https://twitter.com/Copland_max)
 
 **Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
 
