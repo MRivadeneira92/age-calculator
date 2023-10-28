@@ -189,6 +189,7 @@ input[type=number] {
     .input-container {
         margin-bottom: 31px;
     }
+    
     .num-container input {
         width: 84px;
     }
@@ -196,15 +197,18 @@ input[type=number] {
     .line-button {
         margin-bottom: 26px;
     }
+
     .line-button button {
         position: absolute;
         left: 0;
         right: 0;
         margin: auto;
     }
+
     button img {
         width: 20px;
     }
+
     .result-num {
         font-size: 51px;
         line-height: 55px;

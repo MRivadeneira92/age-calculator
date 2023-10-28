@@ -71,19 +71,15 @@
 
   btnCalc.addEventListener("click", function(e) {
     if (clickStatus == true) {
-      document.getElementById("result-year").classList.add("ani-right");
-      setTimeout(function(){
-        document.getElementById("result-year").classList.remove("ani-right");
-      },2000)
+      document.getElementById("result-years").classList.add("ani-right");
       document.getElementById("result-month").classList.add("ani-right");
-      setTimeout(function(){
-        document.getElementById("result-month").classList.remove("ani-right");
-      },2000)
       document.getElementById("result-day").classList.add("ani-right");
       setTimeout(function(){
+        document.getElementById("result-years").classList.remove("ani-right");
+        document.getElementById("result-month").classList.remove("ani-right");
         document.getElementById("result-day").classList.remove("ani-right");
       },2000)
-      document.getElementById("result-year").innerHTML = "--";
+      document.getElementById("result-years").innerHTML = "--";
       document.getElementById("result-month").innerHTML = "--";
       document.getElementById("result-day").innerHTML = "--";
       clickStatus = false;
@@ -106,16 +102,19 @@
       document.getElementById("error-year").style.display = "none";
       inputError = false;
     }
+
     if (inputDay == "") {
       errorEmply("day");
       errorShow("day");
       inputError = true;
     }
+
     if (inputMonth == "") {
       errorEmply("month");
       errorShow("month");
       inputError = true;
     }
+
     if (inputYear == "") {
       errorEmply("year");
       errorShow("year");
@@ -179,7 +178,7 @@
     let resultMonth = todayMonth - inputMonth;
     let resultDay = today.getDate() - inputDay;
     
-    animateDigit(resultYear, "year");
+    animateDigit(resultYear, "years");
     setTimeout(function() {
       animateDigit(resultMonth, "month");
     },800)
@@ -190,49 +189,6 @@
       animateDigit(resultDay, "day");
     },1200)
   });
-
-  // number separation for animation 
-  let resultYear = today.getFullYear() - inputYear;
-  let resultMonth = todayMonth - inputMonth;
-  let resultDay = today.getDate() - inputDay;
-  let yearGroup = separateDigits(resultYear);
-  let monthGroup = separateDigits(resultMonth);
-  let dayMonth = separateDigits(resultDay);
-  
-  function animateDigit(value, position) {
-    let timeAnimation = 60;
-    let counter = 0; 
-    if (value > 50) {
-      timeAnimation = 30;
-    }
-    let i = setInterval(function() {
-      if (counter == value) {
-        clearInterval(i);
-        document.getElementById("result-" + position).classList.add("ani-up");
-        setTimeout(function(){
-          document.getElementById("result-" + position).classList.remove("ani-up");
-        },3000)
-
-      }
-      document.getElementById("result-" + position).innerHTML = counter;
-      counter++;
-    }, timeAnimation)
-  }
-
-  /*function animateUnit(value, position, number) {
-    let counter = 0;
-    let i = setInterval(function() {
-      if (counter == value) {
-        clearInterval(i);
-        posCounter++;
-      }
-      document.getElementById("result-" + position + "-" + posCounter).innerHTML = counter;
-      counter++;
-    }, 450)
-  }
-  function deleteNumber(pos) {
-      document.getElementById("ani-number"+pos).remove();
-      }*/
 
   // Functions
   function errorShow(date) {
@@ -258,12 +214,24 @@
       inputError = true;
     }
   }
-
-  function separateDigits(numbers) {
-    let digits = numbers.toString().split("");
-    let realDigits = digits.map(Number);
-    return realDigits;
+  
+  function animateDigit(value, position) {
+    let timeAnimation = 60;
+    let counter = 0; 
+    if (value > 50) {
+      timeAnimation = 30;
+    }
+    let i = setInterval(function() {
+      if (counter == value) {
+        clearInterval(i);
+        document.getElementById("result-" + position).classList.add("ani-up");
+        setTimeout(function(){
+          document.getElementById("result-" + position).classList.remove("ani-up");
+        },2000)
+      }
+      document.getElementById("result-" + position).innerHTML = counter;
+      counter++;
+    }, timeAnimation)
   }
-
 </script>
 </html>
